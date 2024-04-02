@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -9,11 +9,29 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 // - add address to and remove address from blacklist;
 // - add and burn tokens;
 
+
+ //interface of the contract USDT
+ interface IUSDT {
+    function mint(address account, uint256 amount) external;
+ }
+
+
 contract SolarGreenToken is ERC20, Ownable {
   
+//address of the USDT contract
+address public usdtContractAddress = 0x1531BC5dE10618c511349f8007C08966E45Ce8ef;
+
+//interface for connecting with USDT contract
+IUSDT public usdtContract = IUSDT(usdtContractAddress);
+
+//to call function of mint USDT contract
+function mintUSDT(uint256 amount) external onlyOwner {
+    usdtContract.mint(address(this), amount);//calling
+}
+
     mapping(address => bool) private _blacklist; //mapping to store the blacklist status for each address;
 
-    constructor(uint256 initialSupply) ERC20("Solar Green", "SGR") {
+    constructor(uint256 initialSupply) ERC20("Solar Green", "SGR") Ownable(msg.sender) {
         _mint(msg.sender, initialSupply * 10 ** uint256(decimals()));
     } // Constructor function to initialize the Solar Green token with the specified initial supply.
      // It calls the constructor of the ERC20 base contract to set the name and symbol of the token,
