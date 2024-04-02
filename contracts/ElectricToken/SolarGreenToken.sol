@@ -32,11 +32,6 @@ contract SolarGreenToken is ERC20, Ownable {
         return _blacklist[account];
     } // Public function to check if a specified account is blacklisted. Retuns true or false.
 
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal override {
-      require(!_blacklist[from], "Sender is blacklisted");
-      require(!_blacklist[to], "Recipient is blacklisted");
-    } //Internal hook function called befor any token transfer. 
-    // Reverts the transaction if either the sender or recipient is blacklisted.
 
     function mint(address account, uint256 amount) external onlyOwner {
         require(account != address(0), "ERC20: mint to the zero address");
