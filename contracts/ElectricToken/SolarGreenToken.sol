@@ -4,10 +4,13 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+//address SolarGreenToken = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+
 
 // Contract for Soler Green Token it used with  the ERC20 base contract and has functionality as:
 // - add address to and remove address from blacklist;
 // - add and burn tokens;
+
 
 
  //interface of the contract USDT
