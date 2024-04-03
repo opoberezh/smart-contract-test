@@ -27,14 +27,14 @@ address public usdtContractAddress = 0x1531BC5dE10618c511349f8007C08966E45Ce8ef;
 //interface for connecting with USDT contract
 IUSDT public usdtContract = IUSDT(usdtContractAddress);
 
-//to call function of mint USDT contract
+//to call function of mint  USDT contract
 function mintUSDT(uint256 amount) external onlyOwner {
     usdtContract.mint(address(this), amount);//calling
 }
 
     mapping(address => bool) private _blacklist; //mapping to store the blacklist status for each address;
 
-    constructor(uint256 initialSupply) ERC20("Solar Green", "SGR") Ownable(msg.sender) {
+    constructor(uint256 initialSupply) ERC20("Solar Green", "SGR") Ownable() {
         _mint(msg.sender, initialSupply * 10 ** uint256(decimals()));
     } // Constructor function to initialize the Solar Green token with the specified initial supply.
      // It calls the constructor of the ERC20 base contract to set the name and symbol of the token,

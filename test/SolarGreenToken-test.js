@@ -1,26 +1,28 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const solarJSON = require("../artifacts/contracts/ElectricToken/SolarGreenToken.sol/SolarGreenToken.json");
 
 describe("SolarGreenToken", function () {
   let owner;
   let addr1;
   let addr2;
-  let addrs;
-  let SolarGreenToken;
   let store;
+  let erc20;
 
   beforeEach(async function () {
-    //get the contract Factory SolarGreenToken
-    SolarGreenToken = await ethers.getContractFactory("SolarGreenToken", owner);
+    //get objs Signer for owner and addr1, and addr2
+    [owner, addr1, addr2] = await ethers.getSigners();
 
-    //get objs Signer for owner and addr1, and arr addrs with other Signer
-    [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
+    //get the contract Factory SolarGreenToken
+    const SolarGreenToken = await ethers.getContractFactory("SolarGreenToken");
 
     //deploy of SGT contract
-    store = await SolarGreenToken.deploy(owner);
+    store = await SolarGreenToken.deploy(owner.address);
 
-    //wait for contract deploying
+    //wait for contract deploying and get the deployed contract
     await store.deployed();
+
+    erc20 = new ethers.Contract(store.address, solarJSON.abi, owner);
   });
 
   it("Should mint tokens to contract address", async function () {
@@ -32,7 +34,8 @@ describe("SolarGreenToken", function () {
     const amountToMint = 500;
     await store.mint(store.address, amountToMint); // to call func mint to add 500 tokens
 
-    const finalContractBalance = await store.balanceOf(store.address);
+    const finalContractBalance = await store.balanceOf(await store.address);
+
     expect(finalContractBalance).to.equal(amountToMint); //check if balance of SGT contract = amountToMint
   });
 
