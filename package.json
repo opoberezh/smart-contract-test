@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "chai": "^4.4.1",
+    "ethers": "^6.11.1",
     "mocha": "^10.4.0"
   }
 }
