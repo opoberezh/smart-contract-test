@@ -16,7 +16,9 @@
     "hardhat": "^2.22.2"
   },
   "dependencies": {
+    "alchemy-sdk": "^3.2.1",
     "chai": "^4.4.1",
+    "dotenv": "^16.4.5",
     "ethers": "^6.11.1",
     "mocha": "^10.4.0"
   }

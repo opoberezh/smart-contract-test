@@ -16,17 +16,17 @@ interface IUSDT {
 }
 
 contract SolarGreenToken is ERC20, Ownable {
-    // //address of the USDT contract
-    // address public usdtContractAddress =
-    //     0x1531BC5dE10618c511349f8007C08966E45Ce8ef;
+    //address of the USDT contract
+    address public usdtContractAddress =
+        0x1531BC5dE10618c511349f8007C08966E45Ce8ef;
 
-    // //interface for connecting with USDT contract
-    // IUSDT public usdtContract = IUSDT(usdtContractAddress);
+    //interface for connecting with USDT contract
+    IUSDT public usdtContract = IUSDT(usdtContractAddress);
 
-    // //to call function of mint  USDT contract
-    // function mintUSDT(uint256 amount) external onlyOwner {
-    //     usdtContract.mint(address(this), amount); //calling
-    // }
+    //to call function of mint  USDT contract
+    function mintUSDT(uint256 amount) external onlyOwner {
+        usdtContract.mint(address(this), amount); //calling
+    }
 
     mapping(address => bool) private _blacklist; //mapping to store the blacklist status for each address;
 

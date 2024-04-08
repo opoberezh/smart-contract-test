@@ -31,7 +31,6 @@ contract TokenSale is Ownable {
         uint256 saleRate,
         uint256 saleCap,
         uint256 duration,
-        address initialOwner,
         address usdtAddress
     ) Ownable() {
         require(
