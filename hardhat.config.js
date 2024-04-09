@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-ethers");
+
 const dotenv = require("dotenv");
 
 dotenv.config();

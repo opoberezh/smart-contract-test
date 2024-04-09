@@ -13,12 +13,8 @@ async function deployContracts() {
 
   // Deploy SolarGreenToken contract
   const solarGreenToken = await SolarGreenToken.deploy(1000000);
-  const solarGreenTokenDeployment =
-    await solarGreenToken.deployTransaction.wait(); // Wait for deployment transaction to be mined
-  console.log(
-    "SolarGreenToken deployed to:",
-    solarGreenTokenDeployment.contractAddress
-  );
+  await solarGreenToken.deployTransaction.wait(); // Wait for deployment transaction to be mined
+  console.log("SolarGreenToken deployed to:", solarGreenToken.address);
 
   // Deploy TokenSale contract
   const saleRate = 1000; // Sale rate for tokens
@@ -33,8 +29,8 @@ async function deployContracts() {
     duration,
     deployer.address // Pass initialOwner as deployer address
   );
-  const tokenSaleDeployment = await tokenSale.deployTransaction.wait(); // Wait for deployment transaction to be mined
-  console.log("TokenSale deployed to:", tokenSaleDeployment.contractAddress);
+  await tokenSale.deployTransaction.wait(); // Wait for deployment transaction to be mined
+  console.log("TokenSale deployed to:", tokenSale.address);
 
   console.log("Deployment completed successfully.");
 }
